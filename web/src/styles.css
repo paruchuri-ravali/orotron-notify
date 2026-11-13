@@ -1,0 +1,81 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #fafafb; --surface: #ffffff; --surface-2: #f4f4f6; --border: #e8e8ed;
+  --fg: #0f0f13; --muted: #6a6a76; --primary: #4f46e5; --primary-fg: #ffffff; --primary-soft: #eeedfd;
+  --success: #16803c; --success-soft: #e6f6ec; --warning: #a35d00; --warning-soft: #fdf2dc;
+  --danger: #c0281c; --danger-soft: #fdeceb; --info: #1b6fb8; --info-soft: #e5f1fb; --ring: #4f46e5;
+  --c1: #4f46e5; --c2: #0e9f8e; --c3: #e0870c; --c4: #e0407a; --c5: #64748b;
+  --glow: color-mix(in srgb, var(--primary) 9%, transparent);
+}
+.dark {
+  --bg: #09090b; --surface: #101013; --surface-2: #17171b; --border: #242429;
+  --fg: #f4f4f6; --muted: #9b9ba6; --primary: #8b85ff; --primary-fg: #0b0b0e; --primary-soft: #1f1f3f;
+  --success: #4ade80; --success-soft: #0f2a1a; --warning: #fbbf24; --warning-soft: #33250a; --danger: #f87171; --danger-soft: #331412;
+  --info: #60a5fa; --info-soft: #0e2238; --ring: #8b85ff;
+  --c1: #8b85ff; --c2: #2dd4bf; --c3: #fbbf24; --c4: #f472b6; --c5: #94a3b8;
+  --glow: color-mix(in srgb, var(--primary) 14%, transparent);
+}
+@theme inline {
+  --color-bg: var(--bg); --color-surface: var(--surface); --color-surface-2: var(--surface-2); --color-border: var(--border);
+  --color-fg: var(--fg); --color-muted: var(--muted); --color-primary: var(--primary); --color-primary-fg: var(--primary-fg);
+  --color-primary-soft: var(--primary-soft); --color-success: var(--success); --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning); --color-warning-soft: var(--warning-soft); --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft); --color-info: var(--info); --color-info-soft: var(--info-soft);
+  --color-background: var(--bg); --color-foreground: var(--fg); --color-card: var(--surface); --color-card-foreground: var(--fg);
+  --color-popover: var(--surface); --color-popover-foreground: var(--fg); --color-secondary: var(--surface-2); --color-secondary-foreground: var(--fg);
+  --color-muted-foreground: var(--muted); --color-accent: var(--surface-2); --color-accent-foreground: var(--fg);
+  --color-destructive: var(--danger); --color-primary-foreground: var(--primary-fg); --color-destructive-foreground: #fff; --color-input: var(--border); --color-ring: var(--ring);
+  --radius-sm: 6px; --radius-md: 8px; --radius-lg: 10px; --radius-xl: 14px;
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+}
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+html, body, #root { height: 100%; }
+body {
+  background: var(--bg); color: var(--fg); overscroll-behavior-y: none;
+  font-family: var(--app-font, "Inter Variable", Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+  font-size: 13.5px; line-height: 1.5; letter-spacing: -0.006em; -webkit-font-smoothing: antialiased; font-feature-settings: "cv11", "ss01";
+}
+h1, h2, h3 { letter-spacing: -0.02em; }
+select, input, textarea, button { font-family: inherit; letter-spacing: inherit; }
+.app-glow { background: radial-gradient(70rem 26rem at 60% -8rem, var(--glow), transparent 70%); }
+* { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; border: 2px solid transparent; background-clip: content-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); background-clip: content-box; border: 2px solid transparent; }
+*:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; border-radius: 6px; }
+button, a, select, input, textarea, [role="tab"], [role="switch"] { transition: background-color .1s, border-color .1s, color .1s, box-shadow .1s, opacity .1s; }
+input:focus-visible, textarea:focus-visible, [data-radix-select-trigger]:focus-visible { outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 22%, transparent); border-color: var(--ring); }
+tbody tr { transition: background-color .12s; }
+tbody tr:hover { background: color-mix(in srgb, var(--surface-2) 60%, transparent); }
+thead tr { background: color-mix(in srgb, var(--surface-2) 40%, transparent); }
+[data-density="compact"] td { padding-block: 0.3rem; }
+[data-density="compact"] th { padding-block: 0.375rem; }
+@keyframes skeleton { 50% { opacity: .5; } }
+.skeleton { background: var(--surface-2); border-radius: 8px; animation: skeleton 1.4s ease-in-out infinite; }
+@keyframes fade-in-up { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modal-pop { from { opacity: 0; scale: .97; } to { opacity: 1; scale: 1; } }
+@keyframes pop { from { opacity: 0; transform: translateY(-4px) scale(.98); } to { opacity: 1; transform: none; } }
+@keyframes ping-soft { 75%, 100% { transform: scale(2.2); opacity: 0; } }
+.page-enter { animation: fade-in-up .16s cubic-bezier(.2,.7,.2,1); }
+.fade-in { animation: fade .18s ease-out; }
+.modal-in { animation: modal-pop .14s cubic-bezier(.2,.7,.2,1); }
+.pop-in { animation: pop .14s ease-out; transform-origin: var(--radix-select-content-transform-origin, top); }
+.ping-soft { animation: ping-soft 1.8s cubic-bezier(0,0,.2,1) infinite; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .page-enter, .fade-in, .modal-in, .pop-in, .skeleton, .ping-soft { animation: none; } * { transition: none !important; } }
+
+/* Snappy, tactile interactions */
+button, [role="tab"], [role="switch"], [role="combobox"], a { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+button:not(:disabled):active { transform: scale(.98); }
+@media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
+
+/* Syntax highlighting (sugar-high tokens) */
+.sh-code { --sh-class: #7c3aed; --sh-identifier: var(--fg); --sh-sign: var(--muted); --sh-string: #0e9f8e; --sh-keyword: #d6336c; --sh-comment: #8b8b99; --sh-jsxliterals: #4f46e5; --sh-property: #2563eb; --sh-entity: #b45309; }
+.dark .sh-code { --sh-class: #c4b5fd; --sh-string: #5eead4; --sh-keyword: #f472b6; --sh-property: #93c5fd; --sh-entity: #fbbf24; --sh-jsxliterals: #a5b4fc; }
+.grid > * { min-width: 0; }
+
+/* shadcn expects a default border color */
+@layer base { * { border-color: var(--border); } }
